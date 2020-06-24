@@ -38,41 +38,10 @@ function setText( $text){
 
 function setFlex(){
 	$message = '{
-		"type": "flex",
-		"altText": "Flex Message",
-		"contents": {
-		  "type": "bubble",
-		  "direction": "ltr",
-		  "header": {
-			"type": "box",
-			"layout": "vertical",
-			"contents": [
-			  {
-				"type": "text",
-				"text": $text,
-				"align": "center"
-			  }
-			]
-		  },
-		  "hero": {
-			"type": "image",
-			"url": "https://1.bp.blogspot.com/-NahMFzm8uhM/XfRExf7Sd9I/AAAAAAAAKYo/fc2PueeMW_c2EXXsqKByYf86geGDd_hwQCLcBGAsYHQ/s420-p/01.jpg",
-			"size": "full",
-			"aspectRatio": "1.51:1",
-			"aspectMode": "fit"
-		  },
-		  "body": {
-			"type": "box",
-			"layout": "vertical",
-			"contents": [
-			  {
-				"type": "text",
-				"text": "Body",
-				"align": "center"
-			  }
-			]
-		  }
-		}
+		"type": "sticker",
+  "packageId": "1",
+  "stickerId": "2569"
+		
 	  }';
 	return $message;
 }
