@@ -18,9 +18,7 @@ if (!is_null($events['events'])) {
 			error_log($event['message']['text']);
 			$text = $event['message']['text'];
 			$replyToken = $event['replyToken'];
-			## เปิดสำหรับใช้่งาน mysql message
-			// $text = searchMessage($text ,$conn);
-			// $messages = setText($text);
+			
 			$messages = setFlex($text);
 			sentToLine( $replyToken , $access_token  , $messages );
 		}
@@ -41,31 +39,28 @@ function setText( $text){
 
 function setFlex( $text){
 	if($text == "วีรชัย"){
-	$message = '
-			  {
-				"type": "text",
-				"text": "วีรชัย",
-				"align": "center"
-			  }
-			';
+		$data_podt = "{\"birthday\":\"25351227\",\"cid\":\"1341500202156\",\"mobile\":\"0991013326\",\"page\":\"cvda002\"}";
+		send_data($data_podt);
+				// $message = '
+				// 		{
+				// 			"type": "text",
+				// 			"text": "วีรชัย",
+				// 			"align": "center"
+				// 		}
+				// 		';
+				// 	return $message;
+	}else if($text == "รุ่งทิวา"){
+		$message = '
+		{
+			"type": "text",
+			"text": "วีรชัย",
+			"align": "center"
+		}
+		';
 	return $message;
-			}
+	}
 }
 
-function searchMessage($text , $conn){
-	$sql = "SELECT * FROM data where keyword='".$text."' ";
-	$result = $conn->query($sql);
-	
-	if ($result->num_rows > 0) {
-		while($row = $result->fetch_assoc()) {
-			$message = $row['intent'];
-		}
-	} else {
-		$message = "ไม่เข้าใจอ่ะ";
-	}
-	$conn->close();
-	return $message;
-}
 
 function sentToLine($replyToken , $access_token  , $messages ){
 	error_log("send");
@@ -90,6 +85,91 @@ function sentToLine($replyToken , $access_token  , $messages ){
 	echo $result . "\r\n";
 	error_log($result);
 	error_log("send ok");
+}
+
+function send_data( $data_podt){
+	function Curl($url, $post_data, &$http_status, &$header = null) {
+    
+
+		$ch=curl_init();
+		// user credencial
+		
+		curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+	
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_URL, $url);
+	
+		// post_data
+		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+	
+		if (!is_null($header)) {
+			curl_setopt($ch, CURLOPT_HEADER, true);
+		}
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json', 'Content-Type: application/json'));
+	
+		curl_setopt($ch, CURLOPT_VERBOSE, true);
+		
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	
+		$response = curl_exec($ch);
+		
+		  
+		$body = null;
+		// error
+		if (!$response) {
+			$body = curl_error($ch);
+			// HostNotFound, No route to Host, etc  Network related error
+			$http_status = -1;
+		   
+		} else {
+		   //parsing http status code
+			$http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+	
+			if (!is_null($header)) {
+				$header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+	
+				$header = substr($response, 0, $header_size);
+				$body = substr($response, $header_size);
+			} else {
+				$body = $response;
+			}
+		}
+	
+		curl_close($ch);
+	
+		return $body;
+	}
+	
+	$url = "https://appealcovid19.xn--12cl1ck0bl6hdu9iyb9bp.com/appeal-web/api/appeal-api/personal-info/verify";
+	
+	$json = $data_podt;
+	
+	$ret = Curl($url, $json, $http_status);
+	
+	
+	
+	// Convert JSON string to Array
+	$someArray = json_decode($ret, true);
+print_r($someArray['data']['dataRegis']['payment']['paymentHistory'][1]['effDate']);  
+$res = $someArray['data']['dataRegis']['payment']['paymentHistory'][1];      // Dump all data of the Array
+print_r($res);
+if($res  == ""){
+  echo "ไม่พบ";
+}else{
+	print_r($someArray['data']['dataRegis']['payment']['paymentHistory'][1]['effDate']);
+	$date = $someArray['data']['dataRegis']['payment']['paymentHistory'][1]['effDate'];
+	$message = '
+		{
+			"type": "text",
+			"text": "โอนวันที่ "'.$date.',
+			"align": "center"
+		}
+		';
+	return $message;
+}
 }
 
 
