@@ -29,18 +29,21 @@ if (!is_null($events['events'])) {
 
 
 function setText( $text){
-	$messages = [
-		'type' => 'text',
-		'text' => $text
-	];
-	return $messages;
+	if($text == "วีรชัย"){
+		$messages = [
+			'type' => 'text',
+			'text' => $text
+		];
+		return $messages;
+	}
+	
 }
 
 function setFlex(){
 	$message = '
 			  {
 				"type": "text",
-				"text": "Header",
+				"text": "วีรชัย",
 				"align": "center"
 			  }
 			';
