@@ -56,7 +56,7 @@ function setFlex(){
 		  },
 		  "hero": {
 			"type": "image",
-			"url": "https://developers.line.biz/assets/images/services/bot-designer-icon.png",
+			"url": "https://1.bp.blogspot.com/-NahMFzm8uhM/XfRExf7Sd9I/AAAAAAAAKYo/fc2PueeMW_c2EXXsqKByYf86geGDd_hwQCLcBGAsYHQ/s420-p/01.jpg",
 			"size": "full",
 			"aspectRatio": "1.51:1",
 			"aspectMode": "fit"
