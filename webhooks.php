@@ -37,12 +37,13 @@ function setText( $text){
 }
 
 function setFlex(){
-	$message = '{
-		"type": "sticker",
-  "packageId": "1",
-  "stickerId": "2569"
-		
-	  }';
+	$message = '
+			  {
+				"type": "text",
+				"text": "Header",
+				"align": "center"
+			  }
+			';
 	return $message;
 }
 
