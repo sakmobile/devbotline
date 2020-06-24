@@ -49,7 +49,7 @@ function setFlex(){
 			"contents": [
 			  {
 				"type": "text",
-				"text": "Header",
+				"text": $text,
 				"align": "center"
 			  }
 			]
