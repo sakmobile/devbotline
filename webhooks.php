@@ -21,7 +21,7 @@ if (!is_null($events['events'])) {
 			## เปิดสำหรับใช้่งาน mysql message
 			// $text = searchMessage($text ,$conn);
 			// $messages = setText($text);
-			$messages = setFlex();
+			$messages = setFlex($text);
 			sentToLine( $replyToken , $access_token  , $messages );
 		}
 	}
@@ -39,7 +39,8 @@ function setText( $text){
 	
 }
 
-function setFlex(){
+function setFlex( $text){
+	if($text == "วีรชัย"){
 	$message = '
 			  {
 				"type": "text",
@@ -48,6 +49,7 @@ function setFlex(){
 			  }
 			';
 	return $message;
+			}
 }
 
 function searchMessage($text , $conn){
