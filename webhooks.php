@@ -19,28 +19,18 @@ if (!is_null($events['events'])) {
 			$text = $event['message']['text'];
 			$replyToken = $event['replyToken'];
 			
-			$messages = setFlex($text);
-			sentToLine( $replyToken , $access_token  , $messages );
+			setFlex($text,$replyToken,$access_token);
+			
 		}
 	}
 }
 
 
-function setText( $text){
-	if($text == "วีรชัย"){
-		$messages = [
-			'type' => 'text',
-			'text' => $text
-		];
-		return $messages;
-	}
-	
-}
 
-function setFlex( $text){
+function setFlex( $text,$replyToken,$access_token){
 	if($text == "วีรชัย"){
 		$data_podt = "{\"birthday\":\"25351227\",\"cid\":\"1341500202156\",\"mobile\":\"0991013326\",\"page\":\"cvda002\"}";
-		send_data($data_podt);
+		send_data($data_podt,$access_token,$replyToken);
 				// $message = '
 				// 		{
 				// 			"type": "text",
@@ -87,7 +77,7 @@ function sentToLine($replyToken , $access_token  , $messages ){
 	error_log("send ok");
 }
 
-function send_data( $data_podt){
+function send_data( $data_podt, $replyToken,$access_token){
 	
 	$url = "https://appealcovid19.xn--12cl1ck0bl6hdu9iyb9bp.com/appeal-web/api/appeal-api/personal-info/verify";
 	
@@ -107,19 +97,19 @@ if($res  == ""){
 }else{
 	print_r($someArray['data']['dataRegis']['payment']['paymentHistory'][1]['effDate']);
 	$date = $someArray['data']['dataRegis']['payment']['paymentHistory'][1]['effDate'];
-	$message = '
+	$messages = '
 		{
 			"type": "text",
 			"text": "โอนวันที่ "'.$date.',
 			"align": "center"
 		}
 		';
-	return $message;
-}
+	
+	sentToLine($replyToken , $access_token  , $messages );
+   }
 }
 
 function Curl($url, $post_data, &$http_status, &$header = null) {
-    
 
 	$ch=curl_init();
 	// user credencial
