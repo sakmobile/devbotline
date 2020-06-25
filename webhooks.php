@@ -22,15 +22,15 @@ if (!is_null($events['events'])) {
 			//setFlex($text,$replyToken,$access_token);
 			if($text == "วีรชัย"){
 				$data_podt = "{\"birthday\":\"25351227\",\"cid\":\"1341500202156\",\"mobile\":\"0991013326\",\"page\":\"cvda002\"}";
-				//send_data($data_podt,$access_token,$replyToken);
-						$messages = '
-								{
-									"type": "text",
-									"text": "วีรชัย",
-									"align": "center"
-								}
-								';
-								sentToLine($replyToken , $access_token  , $messages );
+				send_data($data_podt,$access_token,$replyToken);
+						// $messages = '
+						// 		{
+						// 			"type": "text",
+						// 			"text": "วีรชัย",
+						// 			"align": "center"
+						// 		}
+						// 		';
+								//sentToLine($replyToken , $access_token  , $messages );
 			}else if($text == "รุ่งทิวา"){
 				$message = '
 				{
@@ -100,7 +100,6 @@ if($res  == ""){
 			"align": "center"
 		}
 		';
-	
 	sentToLine($replyToken , $access_token  , $messages );
    }
 }
