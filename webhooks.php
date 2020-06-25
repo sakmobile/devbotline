@@ -79,33 +79,7 @@ function send_data( $data_podt, $replyToken,$access_token){
 	
 	$json = $data_podt;
 	
-	$ret = Curl($url, $json, $http_status);
-	
-	
-	
-	// Convert JSON string to Array
-	$someArray = json_decode($ret, true);
-print_r($someArray['data']['dataRegis']['payment']['paymentHistory'][1]['effDate']);  
-$res = $someArray['data']['dataRegis']['payment']['paymentHistory'][1];      // Dump all data of the Array
-print_r($res);
-if($res  == ""){
-  echo "ไม่พบ";
-}else{
-	print_r($someArray['data']['dataRegis']['payment']['paymentHistory'][1]['effDate']);
-	$date = $someArray['data']['dataRegis']['payment']['paymentHistory'][1]['effDate'];
-	$messages = '
-		{
-			"type": "text",
-			"text": "โอนวันที่ ",
-			"align": "center"
-		}
-		';
-	sentToLine($replyToken , $access_token  , $messages );
-   }
-}
-
-function Curl($url, $post_data, &$http_status, &$header = null) {
-
+$header = null;
 	$ch=curl_init();
 	// user credencial
 	
@@ -116,7 +90,7 @@ function Curl($url, $post_data, &$http_status, &$header = null) {
 
 	// post_data
 	curl_setopt($ch, CURLOPT_POST, true);
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
 
 	if (!is_null($header)) {
 		curl_setopt($ch, CURLOPT_HEADER, true);
@@ -155,8 +129,31 @@ function Curl($url, $post_data, &$http_status, &$header = null) {
 
 	curl_close($ch);
 
-	return $body;
+	
+	
+	
+	// Convert JSON string to Array
+	$someArray = json_decode($body, true);
+print_r($someArray['data']['dataRegis']['payment']['paymentHistory'][1]['effDate']);  
+$res = $someArray['data']['dataRegis']['payment']['paymentHistory'][1];      // Dump all data of the Array
+print_r($res);
+if($res  == ""){
+  echo "ไม่พบ";
+}else{
+	print_r($someArray['data']['dataRegis']['payment']['paymentHistory'][1]['effDate']);
+	$date = $someArray['data']['dataRegis']['payment']['paymentHistory'][1]['effDate'];
+	$messages = '
+		{
+			"type": "text",
+			"text": "โอนวันที่ ",
+			"align": "center"
+		}
+		';
+	sentToLine($replyToken , $access_token  , $messages );
+   }
 }
+
+
 
 
 function sentToLine($replyToken , $access_token  , $messages ){
