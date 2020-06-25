@@ -132,8 +132,8 @@ function send_data( $data_podt, $replyToken,$access_token ,$url, &$http_status, 
 	// 	}
 	// 	';
 
-	return $arrayPostData;
-	//sentToLine($replyToken , $access_token  , $messages );
+	//return $arrayPostData;
+	sentToLine($replyToken , $access_token  , $arrayPostData );
 	
 	// Convert JSON string to Array
 	$someArray = json_decode($body, true);
