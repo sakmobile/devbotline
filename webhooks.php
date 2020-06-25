@@ -121,11 +121,11 @@ function send_data( $data_podt, $replyToken,$access_token ,$url, &$http_status, 
 	}
 
 	curl_close($ch);
-	
+	$test = "29/06/2563";
 	$messages = '
 		{
 			"type": "text",
-			"text": "โอนวันที่ "'.$body.',
+			"text": "โอนวันที่ "'.$test.',
 			"align": "center"
 		}
 		';
