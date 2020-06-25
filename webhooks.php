@@ -96,7 +96,7 @@ if($res  == ""){
 	$messages = '
 		{
 			"type": "text",
-			"text": "โอนวันที่ "'.$date.',
+			"text": "โอนวันที่ ",
 			"align": "center"
 		}
 		';
