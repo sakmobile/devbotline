@@ -19,7 +19,28 @@ if (!is_null($events['events'])) {
 			$text = $event['message']['text'];
 			$replyToken = $event['replyToken'];
 			
-			setFlex($text,$replyToken,$access_token);
+			//setFlex($text,$replyToken,$access_token);
+			if($text == "วีรชัย"){
+				$data_podt = "{\"birthday\":\"25351227\",\"cid\":\"1341500202156\",\"mobile\":\"0991013326\",\"page\":\"cvda002\"}";
+				//send_data($data_podt,$access_token,$replyToken);
+						$messages = '
+								{
+									"type": "text",
+									"text": "วีรชัย",
+									"align": "center"
+								}
+								';
+								sentToLine($replyToken , $access_token  , $messages );
+			}else if($text == "รุ่งทิวา"){
+				$message = '
+				{
+					"type": "text",
+					"text": "วีรชัย",
+					"align": "center"
+				}
+				';
+			return $message;
+			}
 			
 		}
 	}
@@ -27,55 +48,30 @@ if (!is_null($events['events'])) {
 
 
 
-function setFlex( $text,$replyToken,$access_token){
-	if($text == "วีรชัย"){
-		$data_podt = "{\"birthday\":\"25351227\",\"cid\":\"1341500202156\",\"mobile\":\"0991013326\",\"page\":\"cvda002\"}";
-		send_data($data_podt,$access_token,$replyToken);
-				// $message = '
-				// 		{
-				// 			"type": "text",
-				// 			"text": "วีรชัย",
-				// 			"align": "center"
-				// 		}
-				// 		';
-				// 	return $message;
-	}else if($text == "รุ่งทิวา"){
-		$message = '
-		{
-			"type": "text",
-			"text": "วีรชัย",
-			"align": "center"
-		}
-		';
-	return $message;
-	}
-}
+// function setFlex( $text,$replyToken,$access_token){
+// 	if($text == "วีรชัย"){
+// 		$data_podt = "{\"birthday\":\"25351227\",\"cid\":\"1341500202156\",\"mobile\":\"0991013326\",\"page\":\"cvda002\"}";
+// 		send_data($data_podt,$access_token,$replyToken);
+// 				// $message = '
+// 				// 		{
+// 				// 			"type": "text",
+// 				// 			"text": "วีรชัย",
+// 				// 			"align": "center"
+// 				// 		}
+// 				// 		';
+// 				// 	return $message;
+// 	}else if($text == "รุ่งทิวา"){
+// 		$message = '
+// 		{
+// 			"type": "text",
+// 			"text": "วีรชัย",
+// 			"align": "center"
+// 		}
+// 		';
+// 	return $message;
+// 	}
+// }
 
-
-function sentToLine($replyToken , $access_token  , $messages ){
-	error_log("send");
-	$url = 'https://api.line.me/v2/bot/message/reply';
-	
-	$data = '{
-		"replyToken" : "'. $replyToken .'" ,
-		"messages" : ['. $messages .']
-	}';
-	$post = $data;
-
-	error_log($post);
-	$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
-	$ch = curl_init($url);
-	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-	$result = curl_exec($ch);
-	curl_close($ch);
-	echo $result . "\r\n";
-	error_log($result);
-	error_log("send ok");
-}
 
 function send_data( $data_podt, $replyToken,$access_token){
 	
@@ -164,3 +160,27 @@ function Curl($url, $post_data, &$http_status, &$header = null) {
 }
 
 
+function sentToLine($replyToken , $access_token  , $messages ){
+	error_log("send");
+	$url = 'https://api.line.me/v2/bot/message/reply';
+	
+	$data = '{
+		"replyToken" : "'. $replyToken .'" ,
+		"messages" : ['. $messages .']
+	}';
+	$post = $data;
+
+	error_log($post);
+	$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+	$ch = curl_init($url);
+	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+	$result = curl_exec($ch);
+	curl_close($ch);
+	echo $result . "\r\n";
+	error_log($result);
+	error_log("send ok");
+}
