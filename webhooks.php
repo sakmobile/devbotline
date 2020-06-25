@@ -23,8 +23,8 @@ if (!is_null($events['events'])) {
 			if($text == "วีรชัย"){
 				$data_podt = "{\"birthday\":\"25351227\",\"cid\":\"1341500202156\",\"mobile\":\"0991013326\",\"page\":\"cvda002\"}";
 				$url = "https://appealcovid19.xn--12cl1ck0bl6hdu9iyb9bp.com/appeal-web/api/appeal-api/personal-info/verify";
-				$messages = send_data($data_podt, $replyToken,$access_token ,$url, $http_status, $header = null);		
-                sentToLine($replyToken , $access_token  , $messages );
+				send_data($data_podt, $replyToken,$access_token ,$url, $http_status, $header = null);		
+                //sentToLine($replyToken , $access_token  , $messages );
 			}else if($text == "รุ่งทิวา"){
 				$message = '
 				{
