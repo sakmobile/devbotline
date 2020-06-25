@@ -128,7 +128,13 @@ $header = null;
 	}
 
 	curl_close($ch);
-	$messages = $body;
+	$messages = '
+		{
+			"type": "text",
+			"text": "โอนวันที่ ",
+			"align": "center"
+		}
+		';
 	
 	sentToLine($replyToken , $access_token  , $messages );
 	
