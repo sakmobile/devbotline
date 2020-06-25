@@ -128,9 +128,9 @@ $header = null;
 	}
 
 	curl_close($ch);
-
+	$messages = $body;
 	
-	
+	sentToLine($replyToken , $access_token  , $messages );
 	
 	// Convert JSON string to Array
 	$someArray = json_decode($body, true);
