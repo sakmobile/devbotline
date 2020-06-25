@@ -121,9 +121,8 @@ function send_data( $data_podt, $replyToken,$access_token ,$url, &$http_status, 
 	}
 
 	curl_close($ch);
-	$arrayPostData['messages'][0]['type'] = "text";
-	$arrayPostData['messages'][0]['text'] = "โอนวันที่";
-	$arrayPostData['messages'][0]['text'] = "โอนวันที่111";
+	
+	
 	// $messages = '
 	// 	{
 	// 		"type": "text",
@@ -133,7 +132,7 @@ function send_data( $data_podt, $replyToken,$access_token ,$url, &$http_status, 
 	// 	';
 
 	//return $arrayPostData;
-	sentToLine($replyToken , $access_token  , $arrayPostData );
+	
 	
 	// Convert JSON string to Array
 	$someArray = json_decode($body, true);
@@ -145,14 +144,9 @@ if($res  == ""){
 }else{
 	print_r($someArray['data']['dataRegis']['payment']['paymentHistory'][1]['effDate']);
 	$date = $someArray['data']['dataRegis']['payment']['paymentHistory'][1]['effDate'];
-	$messages = '
-		{
-			"type": "text",
-			"text": "โอนวันที่ ",
-			"align": "center"
-		}
-		';
-	sentToLine($replyToken , $access_token  , $messages );
+	$arrayPostData['messages'][0]['type'] = "text";
+	$arrayPostData['messages'][0]['text'] = $date;
+	sentToLine($replyToken , $access_token  , $arrayPostData );
    }
 }
 
