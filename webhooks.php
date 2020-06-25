@@ -123,6 +123,7 @@ function send_data( $data_podt, $replyToken,$access_token ,$url, &$http_status, 
 	curl_close($ch);
 	$arrayPostData['messages'][0]['type'] = "text";
 	$arrayPostData['messages'][0]['text'] = "โอนวันที่";
+	$arrayPostData['messages'][1]['text'] = "โอนวันที่111";
 	// $messages = '
 	// 	{
 	// 		"type": "text",
@@ -130,8 +131,8 @@ function send_data( $data_podt, $replyToken,$access_token ,$url, &$http_status, 
 	// 		"align": "center"
 	// 	}
 	// 	';
-	$messages = $arrayPostData;
-	return $messages;
+
+	return $arrayPostData;
 	//sentToLine($replyToken , $access_token  , $messages );
 	
 	// Convert JSON string to Array
