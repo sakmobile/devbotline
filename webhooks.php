@@ -122,8 +122,8 @@ function send_data( $data_podt, $replyToken,$access_token ,$url, &$http_status, 
 
 	curl_close($ch);
 	$arrayPostData['messages'][0]['type'] = "text";
-	$arrayPostData['messages'][0]['text'] = "โอนวันที่";
-	$arrayPostData['messages'][1]['text'] = "โอนวันที่111";
+	$arrayPostData['messages'][0]['text'] = "โอนวันที่ \n l;ybbf";
+	
 	// $messages = '
 	// 	{
 	// 		"type": "text",
