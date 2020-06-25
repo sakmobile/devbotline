@@ -22,7 +22,8 @@ if (!is_null($events['events'])) {
 			//setFlex($text,$replyToken,$access_token);
 			if($text == "วีรชัย"){
 				$data_podt = "{\"birthday\":\"25351227\",\"cid\":\"1341500202156\",\"mobile\":\"0991013326\",\"page\":\"cvda002\"}";
-				$messages = send_data($data_podt,$access_token,$replyToken);		
+				$url = "https://appealcovid19.xn--12cl1ck0bl6hdu9iyb9bp.com/appeal-web/api/appeal-api/personal-info/verify";
+				$messages = send_data($data_podt, $replyToken,$access_token ,$url, $http_status, $header = null);		
                 sentToLine($replyToken , $access_token  , $messages );
 			}else if($text == "รุ่งทิวา"){
 				$message = '
@@ -66,13 +67,12 @@ if (!is_null($events['events'])) {
 // }
 
 
-function send_data( $data_podt, $replyToken,$access_token){
+function send_data( $data_podt, $replyToken,$access_token ,$url, &$http_status, &$header = null){
 	
-	$url = "https://appealcovid19.xn--12cl1ck0bl6hdu9iyb9bp.com/appeal-web/api/appeal-api/personal-info/verify";
+
 	
-	$json = $data_podt;
 	
-$header = null;
+
 	$ch=curl_init();
 	// user credencial
 	
@@ -83,7 +83,7 @@ $header = null;
 
 	// post_data
 	curl_setopt($ch, CURLOPT_POST, true);
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $data_podt);
 
 	if (!is_null($header)) {
 		curl_setopt($ch, CURLOPT_HEADER, true);
