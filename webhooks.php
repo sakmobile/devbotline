@@ -121,14 +121,16 @@ function send_data( $data_podt, $replyToken,$access_token ,$url, &$http_status, 
 	}
 
 	curl_close($ch);
-
-	$messages = '
-		{
-			"type": "text",
-			"text": "โอนวันที่ ",
-			"align": "center"
-		}
-		';
+	$arrayPostData['messages'][0]['type'] = "text";
+	$arrayPostData['messages'][0]['text'] = "โอนวันที่";
+	// $messages = '
+	// 	{
+	// 		"type": "text",
+	// 		"text": "โอนวันที่ ",
+	// 		"align": "center"
+	// 	}
+	// 	';
+	$messages = $arrayPostData;
 	return $messages;
 	//sentToLine($replyToken , $access_token  , $messages );
 	
